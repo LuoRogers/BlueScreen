@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueScreen</title>
+    <script src="./qrcodejs/qrcode.js"></script>
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: #2f67b2;
+      }
+      .icon {
+        position: absolute;
+        top: 25%;
+        left: 15%;
+        transform: translate(-50%, -50%);
+        font-size: 150px;
+        color: #fff;
+      }
+      .title {
+        position: absolute;
+        top: 40%;
+        left: 13%;
+        font-size: 30px;
+        color: #fff;
+        line-height: 50px;
+      }
+      .progress {
+        position: absolute;
+        top: 55%;
+        left: 13%;
+        font-size: 30px;
+        color: #fff;
+      }
+      .qrcode {
+        position: absolute;
+        top: 65%;
+        left: 13%;
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        padding: 5px;
+      }
+      .qrcode img {
+        width: 100%;
+        height: 100%;
+        /* margin: 20px; */
+      }
+      .context {
+        font-size: 15px;
+        color: #fff;
+      }
+      #c_1 {
+        position: absolute;
+        top: 65%;
+        left: 20%;
+      }
+      #c_2 {
+        position: absolute;
+        top: 70%;
+        left: 20%;
+        line-height: 25px;
+      }
+    </style>
+    <div class="icon">:(</div>
+    <div class="title">
+      你的电脑出现问题，需要重启。<br />我们只收集某些错误信息，然后你可以重新启动
+    </div>
+
+    <div id="prog" class="progress">0% 完成</div>
+    <div class="qrcode" id="qrcode"></div>
+    <div class="context" id="c_1">
+      有关此问题的详细信息和可能的解决方法，请访问 http://windows/stopcode
+    </div>
+    <div class="context" id="c_2">
+      如果致电支持人员，请向他们提供此信息：<br />终止代码：NO_MONEY_ERROR
+    </div>
+    <script>
+      // 二维码
+      var qrcode = new QRCode(document.getElementById("qrcode"),
+      {
+        colorLight: "#FFFFFF",
+        colorDark: "#2f67b2",
+      }
+      );
+      qrcode.makeCode("NO_MONEY_ERROR");
+
+        // 进度条
+        var prog = document.getElementById("prog");
+        var i = 0;
+        var timer = setInterval(function () {
+          i++;
+          prog.innerHTML = i + "% 完成";
+          if (i == 100) {
+            clearInterval(timer);
+            prog.innerHTML = "100% 完成";
+            i = 0;
+          }
+        }, 5000);
+    </script>
+  </body>
+</html>
